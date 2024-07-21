@@ -5,9 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class MetricsProducerApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(MetricsProducerApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(MetricsProducerApplication.class, args);
+    }
 }
