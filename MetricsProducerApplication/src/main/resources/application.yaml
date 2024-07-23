@@ -1,6 +1,8 @@
 spring:
   application:
     name: MetricsProducerApplication
+server:
+  port: 8080
 
 #Настройка Actuator
 management:

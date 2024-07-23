@@ -10,20 +10,19 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
-import ru.t1.MetricsProducerApplication.dto.MetricDTO;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class KafkaConfig {
+public class KafkaProducerConfig {
     @Bean
     public NewTopic metricTopic() {
         return TopicBuilder.name("metrics-topic").partitions(1).replicas(1).build();
     }
 
     @Bean
-    public ProducerFactory<String, MetricDTO> producerFactory() {
+    public ProducerFactory<String, Map<String, String>> userProducerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -32,7 +31,7 @@ public class KafkaConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, MetricDTO> kafkaTemplate() {
-        return new KafkaTemplate<>(producerFactory());
+    public KafkaTemplate<String, Map<String, String>> userKafkaTemplate() {
+        return new KafkaTemplate<>(userProducerFactory());
     }
 }
