@@ -16,11 +16,10 @@ import java.util.Map;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ActuatorMetricService {
-    MetricsEndpoint metricsEndpoint;
-    MetricSendService metricSendService;
-    private final static int ONCE_PER_MINUTE = 10000;
+    private final MetricsEndpoint metricsEndpoint;
+    private final MetricSendService metricSendService;
+    private final static int ONCE_PER_MINUTE = 60_000;
     private final static String[] metricsNames = {"jvm.memory.used", "system.cpu.usage"};
 
     @Scheduled(fixedRate = ONCE_PER_MINUTE)
@@ -35,7 +34,6 @@ public class ActuatorMetricService {
                     .toString());
             metric.put("metricCreationTime", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")));
             metricSendService.sendMetric(metric);
-            log.info("Metric {} sent", metric);
         }
     }
 }
