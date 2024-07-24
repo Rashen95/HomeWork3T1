@@ -13,9 +13,8 @@ import ru.t1.MetricsProducerApplication.service.MetricSendService;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/metrics")
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class MetricController {
-    MetricSendService metricSendService;
+    private final MetricSendService metricSendService;
 
     @PostMapping
     public void postMetric(@RequestBody MetricDTO metricDTO) {

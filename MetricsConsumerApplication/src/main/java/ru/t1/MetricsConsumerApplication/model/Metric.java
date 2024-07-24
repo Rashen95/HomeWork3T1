@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public class Metric {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    String id;
+    Long id;
 
     @Column(name = "metricName")
     String metricName;
@@ -24,6 +24,6 @@ public class Metric {
     @Column(name = "metricValue")
     String metricValue;
 
-    @Column(name = "timestamp_date")
-    LocalDate timestampDate;
+    @Column(name = "metric_creation_time")
+    LocalDateTime metricCreationTime;
 }
